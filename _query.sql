@@ -15,6 +15,8 @@ UNIQUE KEY (user_id),
 KEY token(token)
 ) ENGINE=InnoDB DEFAULT CHARSET=UTF8 COMMENT='사용자';
 
+INSERT INTO users SET user_id='admin', user_pwd=password('1111'), user_name='관리자', token='', level='100', reg_date=NOW();
+
 CREATE TABLE user_geo(
 idx INT UNSIGNED NOT NULL AUTO_INCREMENT COMMENT '일련번호',
 users_idx INT UNSIGNED NOT NULL DEFAULT '0' COMMENT '사용자번호',

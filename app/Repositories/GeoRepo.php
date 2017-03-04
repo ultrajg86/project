@@ -9,6 +9,7 @@
 namespace App\Repositories;
 
 use App\Models\GeoModel;
+use Illuminate\Database\Capsule\Manager as DB;
 
 class GeoRepo{
 
@@ -23,7 +24,17 @@ class GeoRepo{
     }
 
     public function create(array $data = array()){
-        return $this->geo->create();
+        $result = $this->geo->isCreate(
+            [
+                'user_id'=>'tester' . rand(1, 100),
+                'user_pwd'=> '1111',
+                'user_name'=>'관리자1',
+                'token'=>'',
+                'level'=>'1',
+                'reg_date'=>date('Y-m-d H:i:s')
+            ]
+        );
+        return $this->geo->getFind();
     }
 
 }

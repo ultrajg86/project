@@ -12,10 +12,25 @@ use Illuminate\Database\Eloquent\Model;
 
 class GeoModel extends Model{
 
-    public function create(array $data = array()){
-        $b = $this->qu
-        var_dump($b);
-        return $data;
+    public $timestamps = false;
+
+    protected $table = 'users';
+    protected $fillable = [
+        'user_id',
+        'user_pwd',
+        'user_name',
+        'token',
+        'level',
+        'reg_date'
+    ];
+
+    public function isCreate($data){
+        $data['user_pwd'] = $this->getConnection()->raw("password('" . $data['user_pwd'] . "')");
+        return $this->create($data);
+    }
+
+    public function getFind(){
+        return $this->where('user_id', 'admin')->first();
     }
 
 }
