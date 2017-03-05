@@ -33,9 +33,16 @@ class GeoController{
     }
 
     public function create(Request $request, Response $response, $args){
-        $data = $this->geoRepo->create(array());
-        var_dump($data);
-        return json_encode(array('true'=>'a'));
+        $data = array(
+            'user_id' => '33333',
+            'user_pwd' => '1111',
+            'user_name' => '123123123',
+            'token' => '',
+            'level' => '1'
+        );
+        $data = $this->geoRepo->create($data);
+        //var_dump($data);
+        return json_encode($data);
     }
 
 }
