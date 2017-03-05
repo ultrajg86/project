@@ -54,6 +54,11 @@ $container['logger'] = function($container){
   return $logger;
 };
 
+//validator
+$container['validator'] = function($container){
+  return new \App\Validation\Validator();
+};
+
 //controller
 $container['HomeController'] = function ($container) {
     return new \App\Controllers\HomeController($container);

@@ -21,6 +21,9 @@ class GeoRepo{
         $result = false;
         try{
             $result = $this->geo->isCreate($data);
+            if($result){
+
+            }
         }catch(QueryException $e){
             var_dump($e->getMessage());
             $result = false;

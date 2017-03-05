@@ -11,12 +11,14 @@ namespace App\Controllers;
 use Psr\Http\Message\ServerRequestInterface as Request;
 use Psr\Http\Message\ResponseInterface as Response;
 use App\Repositories\GeoRepo;
+use Respect\Validation\Validator as v;
 
 class GeoController{
 
     private $container;
     private $logger;
     private $view;
+    private $validator;
 
     private $geoRepo;
 
@@ -24,6 +26,7 @@ class GeoController{
         $this->container = $container;
         $this->logger = $this->container->get('logger');
         $this->view = $this->container->get('view');
+        $this->validator = $this->container->get('validator');
 
         $this->geoRepo = new GeoRepo();
     }
@@ -33,6 +36,17 @@ class GeoController{
     }
 
     public function create(Request $request, Response $response, $args){
+
+        $validation = $this->validator->validate($request, [
+            //'email' => v::noWhitespace()->notEmpty(),
+            'user_Id' => v::noWhitespace()->notEmpty()->alpha(),
+            'user_pwd' => v::noWhitespace()->notEmpty(),
+        ]);
+
+        if($validation->failed()){
+            return $response->withRedirect('/');
+        }
+
         $data = array(
             'user_id' => '33333',
             'user_pwd' => '1111',
