@@ -37,26 +37,39 @@ class GeoController{
 
     public function create(Request $request, Response $response, $args){
 
-        $validation = $this->validator->validate($request, [
-            //'email' => v::noWhitespace()->notEmpty(),
-            'user_Id' => v::noWhitespace()->notEmpty()->alpha(),
-            'user_pwd' => v::noWhitespace()->notEmpty(),
-        ]);
 
-        if($validation->failed()){
-            return $response->withRedirect('/');
+        //var_dump($request->getBody());
+
+
+
+        var_dump($args);
+
+        try{
+
+            $validation = $this->validator->validate($request, [
+                'user_idx'  =>  v::notEmpty()->intType(),
+                'lat'       =>  v::notEmpty()->floatType(),
+                'long'      =>  v::notEmpty()->floatType(),
+                'wait'      =>  v::notEmpty()->intType(),
+            ]);
+
+            if($validation->failed()){
+                throw new \Exception(serialize($validation->errors));
+            }
+
+            $data = array(
+
+            );
+
+            $data = $this->geoRepo->create($data);
+            return json_encode($data);
+
+        }catch(\Exception $e){
+            //$result = array('msg'=>$e->getMessage());
+            return json_encode(unserialize($e->getMessage()));
         }
 
-        $data = array(
-            'user_id' => '33333',
-            'user_pwd' => '1111',
-            'user_name' => '123123123',
-            'token' => '',
-            'level' => '1'
-        );
-        $data = $this->geoRepo->create($data);
-        //var_dump($data);
-        return json_encode($data);
+
     }
 
 }

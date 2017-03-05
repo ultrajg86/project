@@ -24,18 +24,8 @@ class HomeController{
         // TODO: Implement __destruct() method.
     }
 
-    public function __invoke($request, $response, $args){
-        // TODO: Implement __invoke() method.
-        echo 'aaaaaaaaaaaaaa';
-    }
-
     public function index($request, $response, $args){
-        echo 'b';
-    }
-
-    public function test($request, $response, $args){
-        $this->logger->info('aaaaaaaaaaaaaa');
-        var_dump($args);
+        $this->view->render($response, '/api.php');
     }
 
 }

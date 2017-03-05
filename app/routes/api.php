@@ -7,8 +7,38 @@
  */
 
 //api route
-$app->get('/api', 'HomeController:index');
-$app->get('/api/geo', 'GeoController:create');
+$app->group('/api', function(){
+
+    $this->get('', function($request, $response){
+        return $this->view->render($response, '/index.php');
+    });
+
+    $this->group('/users', function(){
+
+        $this->get('/test', function($request, $response){
+            return $this->view->render($response, '/index.php');
+        });
+
+        $this->post('', 'UsersController:create');
+
+    });
+
+    $this->group('/geo', function(){
+
+        $this->get('', function($request, $response){
+            var_dump($request->getBody());
+        });
+
+        $this->post('', 'GeoController:create');
+
+        $this->post('/test', function($request, $response){
+            var_dump($request->getBody());
+        });
+
+    });
+
+});
+
 
 /*
 $app->group('/api', function(){

@@ -17,7 +17,7 @@ KEY token(token)
 
 INSERT INTO users SET user_id='admin', user_pwd=password('1111'), user_name='관리자', token='', level='100', reg_date=NOW();
 
-CREATE TABLE user_geo(
+CREATE TABLE geo_position(
 idx INT UNSIGNED NOT NULL AUTO_INCREMENT COMMENT '일련번호',
 users_idx INT UNSIGNED NOT NULL DEFAULT '0' COMMENT '사용자번호',
 map_type INT UNSIGNED NOT NULL DEFAULT '1' COMMENT '1:구글,2:네이버',

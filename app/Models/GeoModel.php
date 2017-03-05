@@ -7,19 +7,22 @@ use Illuminate\Database\Eloquent\Model;
 class GeoModel extends Model {
 
     public $timestamps = false;
-    protected $table = 'users';
+    protected $table = 'geo_position';
     protected $fillable = [
         'idx',
-        'user_id',
-        'user_pwd',
-        'user_name',
-        'token',
-        'level',
-        'reg_date'
+        'user_idx',
+        'map_type',
+        'latitude',
+        'longitude',
+        'wait_time',
+        'reg_date',
     ];
 
+    public function getGeoList($userIdx){
+        return $this->where('user_idx', $userIdx)->get();
+    }
+
     public function isCreate($data = array()){
-        $data['user_pwd'] = $this->getConnection()->raw("password('" . $data['user_pwd'] . "')");
         $data['reg_date'] = $this->getConnection()->raw("NOW()");
         return $this->create($data);
     }
