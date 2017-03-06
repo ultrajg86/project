@@ -8,8 +8,8 @@
 
 namespace App\Controllers;
 
-use Psr\Http\Message\ServerRequestInterface as Request;
-use Psr\Http\Message\ResponseInterface as Response;
+use \Psr\Http\Message\ServerRequestInterface as Request;
+use \Psr\Http\Message\ResponseInterface as Response;
 use App\Repositories\GeoRepo;
 use Respect\Validation\Validator as v;
 
@@ -37,12 +37,9 @@ class GeoController{
 
     public function create(Request $request, Response $response, $args){
 
+        $validation_data = json_decode($request->getBody()->getContents());
 
-        //var_dump($request->getBody());
-
-
-
-        var_dump($args);
+        var_dump($validation_data);
 
         try{
 

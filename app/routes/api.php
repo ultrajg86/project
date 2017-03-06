@@ -6,6 +6,10 @@
  * Time: 오전 9:58
  */
 
+
+use \Psr\Http\Message\ServerRequestInterface as Request;
+use \Psr\Http\Message\ResponseInterface as Response;
+
 //api route
 $app->group('/api', function(){
 
@@ -26,10 +30,18 @@ $app->group('/api', function(){
     $this->group('/geo', function(){
 
         $this->get('', function($request, $response){
-            var_dump($request->getBody());
+            $data= array(
+                'user_idx'=>'1'
+            );
+            return $response->withJson($data);
         });
 
         $this->post('', 'GeoController:create');
+        $this->post('/lists', function(Request $request, Response $response){
+            var_dump(file_get_contents("php://input"));
+            var_dump($request->getBody()->getContents());
+        });
+        $this->post('/list/{name}', 'GeoController:create');
 
         $this->post('/test', function($request, $response){
             var_dump($request->getBody());

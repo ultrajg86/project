@@ -6,9 +6,9 @@
  * Time: 오전 10:45
  */
 
-require 'routes/public.php';
-require 'routes/admin.php';
-require 'routes/api.php';
+require 'Routes/public.php';
+require 'Routes/admin.php';
+require 'Routes/api.php';
 
 // Render Twig template in route
 //$app->get('/hello/{name}', function ($request, $response, $args) {
