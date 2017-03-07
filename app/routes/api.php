@@ -14,7 +14,7 @@ use \Psr\Http\Message\ResponseInterface as Response;
 $app->group('/api', function(){
 
     $this->get('', function($request, $response){
-        return $this->view->render($response, '/index.php');
+        return $this->view->render($response, '/api.php');
     });
 
     $this->group('/users', function(){
@@ -37,15 +37,8 @@ $app->group('/api', function(){
         });
 
         $this->post('', 'GeoController:create');
-        $this->post('/lists', function(Request $request, Response $response){
-            var_dump(file_get_contents("php://input"));
-            var_dump($request->getBody()->getContents());
-        });
-        $this->post('/list/{name}', 'GeoController:create');
 
-        $this->post('/test', function($request, $response){
-            var_dump($request->getBody());
-        });
+        $this->get('/list/{idx}', 'GeoController:lists');
 
     });
 

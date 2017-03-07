@@ -1,5 +1,8 @@
 <?php
 
+ini_set('display_errors', false);
+//error_reporting(E_ALL);
+
 /*
  * template url : https://bootstrapmade.com/demo/Moderna/
  */
