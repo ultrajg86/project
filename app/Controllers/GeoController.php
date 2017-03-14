@@ -8,8 +8,8 @@
 
 namespace App\Controllers;
 
-use \Psr\Http\Message\ServerRequestInterface as Request;
-use \Psr\Http\Message\ResponseInterface as Response;
+use Psr\Http\Message\ServerRequestInterface as Request;
+use Psr\Http\Message\ResponseInterface as Response;
 use App\Repositories\GeoRepo;
 use Respect\Validation\Validator as v;
 
@@ -35,36 +35,30 @@ class GeoController{
         // TODO: Implement __destruct() method.
     }
 
-    public function lists(Request $request, Response $response, $args){
-            $data = $this->geoRepo->fetch($args['idx']);
-            return $response->withJson($data);
-    }
-
     public function create(Request $request, Response $response, $args){
+
+
+        //var_dump($request->getBody());
+
+
+
+        var_dump($args);
 
         try{
 
             $validation = $this->validator->validate($request, [
-                'user_idx'  =>  v::notEmpty(),
-                'lat'       =>  v::notEmpty(),
-                'long'      =>  v::notEmpty(),
-                //'wait'      =>  v::notEmpty(),
+                'user_idx'  =>  v::notEmpty()->intType(),
+                'lat'       =>  v::notEmpty()->floatType(),
+                'long'      =>  v::notEmpty()->floatType(),
+                'wait'      =>  v::notEmpty()->intType(),
             ]);
 
             if($validation->failed()){
                 throw new \Exception(serialize($validation->errors));
             }
 
-            $validation_data = $this->validator->getJsonData();
-
-            foreach($validation_data as $key=>$value){
-                $this->logger->addInfo('[' . __METHOD__ . ']' . $key . '=' . $value);
-            }
-
             $data = array(
-                'user_idx'  =>  $validation_data['user_idx'],
-                'latitude'  =>     $validation_data['lat'],
-                'longitude'  =>     $validation_data['long'],
+
             );
 
             $data = $this->geoRepo->create($data);
@@ -72,8 +66,7 @@ class GeoController{
 
         }catch(\Exception $e){
             //$result = array('msg'=>$e->getMessage());
-            //return json_encode(unserialize($e->getMessage()));
-            return json_encode(false);
+            return json_encode(unserialize($e->getMessage()));
         }
 
 

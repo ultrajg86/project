@@ -7,10 +7,10 @@
  */
 
 //public route
-$app->group('', function(){
+$app->group('/', function(){
 
-    $this->get('/', function($request, $response){
-        return $this->view->render($response, '/index.php');
+    $this->get('', function($request, $response){
+        return $this->view->render($response, '/api.php');
     });
 
     $this->get('/upload/{filename}', function($request, $response, $args){

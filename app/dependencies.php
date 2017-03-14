@@ -22,6 +22,11 @@ $container['db'] = function ($container) use ($capsule) {
 };
 
 // Register component on container
+$container['view'] = function($container){
+    return new \Slim\Views\PhpRenderer('pages');
+};
+
+/*
 $container['view'] = function ($container) {
 
     //$view = new \Slim\Views\Twig('pages', ['cache' => 'cache']);
@@ -33,18 +38,19 @@ $container['view'] = function ($container) {
     // Instantiate and add Slim specific extension
     $basePath = rtrim(str_ireplace('index.php', '', $container['request']->getUri()->getBasePath()), '/');
     $view->addExtension(new Slim\Views\TwigExtension($container['router'], $basePath));
-/*
-    $view->addExtension(new \Slim\Views\TwigExtension(
-        $container->router,
-        $container->request->getUri()
-    ));
-    $view->addExtension(new Twig_Extension_Debug());
-*/
+
+//    $view->addExtension(new \Slim\Views\TwigExtension(
+//        $container->router,
+//        $container->request->getUri()
+//    ));
+//    $view->addExtension(new Twig_Extension_Debug());
+
     //hm.....
     $view->getEnvironment()->addGlobal('base_url', _HOST_);
 
     return $view;
 };
+*/
 
 //logging
 $container['logger'] = function($container){

@@ -30,10 +30,6 @@ class UserModel extends Model {
         return $this->create($data);
     }
 
-    public function getFetchIdx($idx){
-        return $this->where('idx', $idx)->first();
-    }
-
     public function getFetch($userId){
         return $this->where('user_id', $userId)->first();
     }

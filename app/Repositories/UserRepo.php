@@ -8,6 +8,7 @@
 
 namespace App\Repositories;
 
+
 use App\Models\UserModel;
 
 class UserRepo{

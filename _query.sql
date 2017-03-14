@@ -1,6 +1,6 @@
-CREATE DATABASE tracedb;
+CREATE DATABASE tradedb;
 
-USE tracedb;
+USE tradedb;
 
 CREATE TABLE users(
 idx INT UNSIGNED NOT NULL AUTO_INCREMENT COMMENT '일련번호',
@@ -19,7 +19,7 @@ INSERT INTO users SET user_id='admin', user_pwd=password('1111'), user_name='관
 
 CREATE TABLE geo_position(
 idx INT UNSIGNED NOT NULL AUTO_INCREMENT COMMENT '일련번호',
-user_idx INT UNSIGNED NOT NULL DEFAULT '0' COMMENT '사용자번호',
+users_idx INT UNSIGNED NOT NULL DEFAULT '0' COMMENT '사용자번호',
 map_type INT UNSIGNED NOT NULL DEFAULT '1' COMMENT '1:구글,2:네이버',
 latitude DOUBLE NOT NULL DEFAULT '0' COMMENT '위도',
 longitude DOUBLE NOT NULL DEFAULT '0' COMMENT '경도',

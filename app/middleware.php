@@ -11,32 +11,20 @@
 // routes...
 $app->add(function ($request, $response, callable $next) {
 
-    //$response->getBody()->write('start');
     $route = $request->getAttribute('route');
 
-    // return NotFound for non existent route
     if (empty($route)) {
         throw new NotFoundException($request, $response);
     }
 
-//    $name = $route->getName();
-//    $groups = $route->getGroups();
-//    $methods = $route->getMethods();
-//    $arguments = $route->getArguments();
-//    $uri = $request->getUri();//this works
+	$view = $this->get('view');
+	$arrayViewVar = array(
+	    'baseUrl'   =>  $_SERVER['HTTP_HOST'],
+		'title'	=>	'Project',
+	);
+	$view->setAttributes($arrayViewVar);
 
-    //var_dump($name, $groups, $methods, $arguments);
-    //$args = array('name'=>$name, 'groups'=>$groups, 'methods'=>$methods, 'arguments'=>$arguments);
+    $response = $next($request, $response);
 
-    $view = $this->get('view');
-    $path = $request->getUri()->getPath();//this works
-    $view->getEnvironment()->addGlobal('currentPath', $path);
-
-    //$view->getEnvironment()->addGlobal('view', $args);
-
-    // do something with that information
-    $response = $next($request, $response);  //run
-
-    //$response->getBody()->write('end');
     return $response;
 });

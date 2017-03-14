@@ -23,8 +23,6 @@ class GeoModel extends Model {
     }
 
     public function isCreate($data = array()){
-        $data['map_type'] = '1';
-        $data['wait_time'] = time();
         $data['reg_date'] = $this->getConnection()->raw("NOW()");
         return $this->create($data);
     }
